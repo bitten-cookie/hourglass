@@ -1,0 +1,1 @@
+set (THIRD_PARTY_MODULE_PATH "${PROJECT_SOURCE_DIR}/third_party")
