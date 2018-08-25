@@ -52,7 +52,7 @@ namespace hourglass
             }
             else
             {
-                os << "No events!" << std::endl; //
+                os << "No events!" << std::endl;
             }
             return os;
         }
