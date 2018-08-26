@@ -1,4 +1,4 @@
-# Hourglass
+# Hourglass :hourglass_flowing_sand:
 
 **Hourglass** is a C++ library that enables event-driven design over a *time-series*.
 
