@@ -60,10 +60,10 @@ int main()
 ### As a CMake submodule
 
 ### Installing in the system
+*Todo*: Complete CMake install process
 
 ### As a Conan package
-*Todo*. A PR would be appreciated.
-
+*Todo*: A PR would be appreciated.
 
 ## More usages example
 

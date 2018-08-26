@@ -25,7 +25,5 @@ add_subdirectory(third_party)
 add_subdirectory(lib)
 
 if(BUILD_DEMOS)
-    message(STATUS "===== DEMOS ======")
     add_subdirectory(demos)
-    message(STATUS "==================")
 endif()
