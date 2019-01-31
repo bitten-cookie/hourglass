@@ -23,11 +23,11 @@ struct SimpleEvent
 int main()
 {
     hourglass::hourglass<SimpleEvent> h{0}; //using an integer to count time elapsing
-    h.addEvent({"a", 1}, 0); // adds the event to timepoint 0
-    h.addEvent({"b", 2}, 1);
-    h.addEvent({"c", 3}, 1);
-    h.addEvent({"d", 4}, 1);
-    h.addEvent({"e", 5}, 2);
+    h.addEvent(0, {"a", 1}); // adds the event to timepoint 0
+    h.addEvent(1, {"b", 2});
+    h.addEvent(1, {"c", 3});
+    h.addEvent(1, {"d", 4});
+    h.addEvent(2, {"e", 5});
     std::cout << h;
 
     h.advanceTime();

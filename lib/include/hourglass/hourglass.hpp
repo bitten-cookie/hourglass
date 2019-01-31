@@ -22,7 +22,7 @@ namespace hourglass
         Time currentTime() const { return time_; }
         void advanceTime() { time_++; } //todo: implement operator++
 
-        void addEvent(Event&& e, Time&& t) { timeline_.emplace(std::forward<Time>(t), std::forward<Event>(e)); }
+        void addEvent(Time&& t, Event&& e) { timeline_.emplace(std::forward<Time>(t), std::forward<Event>(e)); }
 
         bool hasEventsForCurrentTime() const { return timeline_.count(time_) != 0; }
         std::vector<EventRef> eventsForCurrentTime() const { return this->eventsOnRange(timeline_.equal_range(time_)); }
