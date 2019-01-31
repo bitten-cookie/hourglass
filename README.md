@@ -13,6 +13,8 @@ struct SimpleEvent
     std::string message;
     int value;
 
+    SimpleEvent(std::string m, int v) : message(std::move(m)), value(v) {}
+
     friend std::ostream& operator<<(std::ostream& os, const SimpleEvent& event)
     {
         os << "message: " << event.message << " value: " << event.value;
@@ -22,12 +24,13 @@ struct SimpleEvent
 
 int main()
 {
-    hourglass::hourglass<SimpleEvent> h{0}; //using an integer to count time elapsing
-    h.addEvent(0, {"a", 1}); // adds the event to timepoint 0
+    hourglass::hourglass<SimpleEvent> h{0};
+    h.addEvent(0, {"a", 1});
     h.addEvent(1, {"b", 2});
     h.addEvent(1, {"c", 3});
     h.addEvent(1, {"d", 4});
     h.addEvent(2, {"e", 5});
+    h.addEvent(2, "f", 6);
     std::cout << h;
 
     h.advanceTime();
@@ -53,6 +56,7 @@ int main()
   -> message: d value: 4
 [2] Has events!
   -> message: e value: 5
+  -> message: f value: 6
 [3] No events!
 ```
 

@@ -6,6 +6,8 @@ struct SimpleEvent
     std::string message;
     int value;
 
+    SimpleEvent(std::string m, int v) : message(std::move(m)), value(v) {}
+
     friend std::ostream& operator<<(std::ostream& os, const SimpleEvent& event)
     {
         os << "message: " << event.message << " value: " << event.value;
@@ -21,6 +23,7 @@ int main()
     h.addEvent(1, {"c", 3});
     h.addEvent(1, {"d", 4});
     h.addEvent(2, {"e", 5});
+    h.addEvent(2, "f", 6);
     std::cout << h;
 
     h.advanceTime();

@@ -24,6 +24,9 @@ namespace hourglass
 
         void addEvent(Time&& t, Event&& e) { timeline_.emplace(std::forward<Time>(t), std::forward<Event>(e)); }
 
+        template<class ...EventArgs>
+        void addEvent(Time&& t, EventArgs... args) { addEvent(std::move(t), Event(args...)); }
+
         bool hasEventsForCurrentTime() const { return timeline_.count(time_) != 0; }
         std::vector<EventRef> eventsForCurrentTime() const { return this->eventsOnRange(timeline_.equal_range(time_)); }
 
