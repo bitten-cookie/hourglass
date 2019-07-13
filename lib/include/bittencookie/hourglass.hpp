@@ -6,7 +6,7 @@
 #include <functional>
 #include <ostream>
 
-namespace hourglass
+namespace bittencookie
 {
     template<class Event, class Time = int>
     class hourglass

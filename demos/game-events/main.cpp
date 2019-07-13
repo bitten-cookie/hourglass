@@ -1,5 +1,5 @@
 #include <iostream>
-#include "hourglass/hourglass.hpp"
+#include "bittencookie/hourglass.hpp"
 
 struct player_status
 {
@@ -16,7 +16,7 @@ struct SimpleEvent;
 
 struct game_status
 {
-    hourglass::hourglass<SimpleEvent> hourglass_{0};
+    bittencookie::hourglass<SimpleEvent> hourglass_{0};
     player_status player{};
 };
 
