@@ -6,7 +6,7 @@
 
 ```cpp
 #include <iostream>
-#include "hourglass/hourglass.hpp"
+#include "bittencookie/hourglass.hpp"
 
 struct SimpleEvent
 {
@@ -24,7 +24,7 @@ struct SimpleEvent
 
 int main()
 {
-    hourglass::hourglass<SimpleEvent> h{0};
+    bittencookie::hourglass<SimpleEvent> h{0};
     h.addEvent(0, {"a", 1});
     h.addEvent(1, {"b", 2});
     h.addEvent(1, {"c", 3});
