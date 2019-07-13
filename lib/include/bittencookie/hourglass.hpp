@@ -20,7 +20,7 @@ namespace bittencookie
         explicit hourglass(Time t) : time_(t) {}
 
         Time currentTime() const { return time_; }
-        void advanceTime() { time_++; } //todo: implement operator++
+        void advanceTime() { time_++; }
 
         void addEvent(Time&& t, Event&& e) { timeline_.emplace(std::forward<Time>(t), std::forward<Event>(e)); }
 
