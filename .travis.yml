@@ -1,24 +1,11 @@
 language: cpp
 dist: xenial
 
-os:
-  - linux
-  - osx
-
-compiler:
-  - gcc
-  - clang
-
 install:
   # Install conan
   - pip3 install conan
   # Automatic detection of your arch, compiler, etc.
   - conan user
-  # /usr/bin/gcc is 4.6 always, but gcc-X.Y is available.
-#  - if [[ $CXX = g++ ]]; then export CXX="g++-4.9" CC="gcc-4.9"; fi
-  # /usr/bin/clang has a conflict with gcc, so use clang-X.Y.
-#  - if [[ $CXX = clang++ ]]; then export CXX="clang++-3.5" CC="clang-3.5"; fi
-
 
 script:
   # Call the build system
@@ -26,3 +13,48 @@ script:
   - cmake --build .
   # Run tests
   - ctest .
+
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
+      env:
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-8
+      env:
+        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
+
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-4.0
+          packages:
+            - clang-4.0
+      env:
+        - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0"
+
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-5.0
+          packages:
+            - clang-5.0
+      env:
+        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
+
+before_install:
+  - eval "${MATRIX_EVAL}"
