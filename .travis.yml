@@ -23,6 +23,8 @@ matrix:
     - os: linux
       addons:
         apt:
+          sources:
+            - ubuntu-toolchain-r-test
           packages:
             - g++-7
       env:
@@ -32,6 +34,8 @@ matrix:
     - os: linux
       addons:
         apt:
+          sources:
+            - ubuntu-toolchain-r-test
           packages:
             - g++-8
       env:
@@ -56,3 +60,5 @@ matrix:
         - CC=clang-6.0
         - CXX=clang++-6.0
 
+    - os: osx
+      osx_image: xcode10.1
