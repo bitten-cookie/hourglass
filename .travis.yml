@@ -23,8 +23,6 @@ matrix:
     - os: linux
       addons:
         apt:
-          sources:
-            - ubuntu-toolchain-r-test
           packages:
             - g++-7
       env:
@@ -34,8 +32,6 @@ matrix:
     - os: linux
       addons:
         apt:
-          sources:
-            - ubuntu-toolchain-r-test
           packages:
             - g++-8
       env:
@@ -45,20 +41,18 @@ matrix:
     - os: linux
       addons:
         apt:
-          sources:
-            - llvm-toolchain-trusty-4.0
-          packages:
-            - clang-4.0
-      env:
-        - CC=clang-4.0
-        - CXX=clang++-4.0
-
-    - os: linux
-      addons:
-        apt:
           packages:
             - clang-5.0
       env:
         - CC=clang-5.0
         - CXX=clang++-5.0
+
+    - os: linux
+      addons:
+        apt:
+          packages:
+            - clang-6.0
+      env:
+        - CC=clang-6.0
+        - CXX=clang++-6.0
 
