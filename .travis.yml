@@ -1,9 +1,12 @@
-language: cpp
+language: python
 dist: xenial
 
 branches:
   only:
     - master
+
+before_install:
+  - eval "${MATRIX_EVAL}"
 
 install:
   # Install conan
@@ -60,5 +63,3 @@ matrix:
       env:
         - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
 
-before_install:
-  - eval "${MATRIX_EVAL}"
