@@ -15,7 +15,7 @@ install:
 
 script:
   # Call the build system
-  - cmake .
+  - cmake . -DBUILD_TESTS=ON
   - cmake --build .
   # Run tests
   - ctest .
