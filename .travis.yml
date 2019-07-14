@@ -21,49 +21,59 @@ script:
 
 matrix:
   include:
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-7
-      env:
-        - CC=gcc-7
-        - CXX=g++-7
-
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-8
-      env:
-        - CC=gcc-8
-        - CXX=g++-8
-
-    - os: linux
-      addons:
-        apt:
-          packages:
-            - clang-5.0
-      env:
-        - CC=clang-5.0
-        - CXX=clang++-5.0
-
-    - os: linux
-      addons:
-        apt:
-          packages:
-            - clang-6.0
-      env:
-        - CC=clang-6.0
-        - CXX=clang++-6.0
+#    - os: linux
+#      addons:
+#        apt:
+#          sources:
+#            - ubuntu-toolchain-r-test
+#          packages:
+#            - g++-7
+#      env:
+#        - CC=gcc-7
+#        - CXX=g++-7
+#
+#    - os: linux
+#      addons:
+#        apt:
+#          sources:
+#            - ubuntu-toolchain-r-test
+#          packages:
+#            - g++-8
+#      env:
+#        - CC=gcc-8
+#        - CXX=g++-8
+#
+#    - os: linux
+#      addons:
+#        apt:
+#          packages:
+#            - clang-5.0
+#      env:
+#        - CC=clang-5.0
+#        - CXX=clang++-5.0
+#
+#    - os: linux
+#      addons:
+#        apt:
+#          packages:
+#            - clang-6.0
+#      env:
+#        - CC=clang-6.0
+#        - CXX=clang++-6.0
 
     - os: osx
       osx_image: xcode10.3
+      addons:
+        homebrew:
+          packages: python3
+      before_install:
+        - python3 -m pip install --upgrade virtualenv
+        - virtualenv -p python3 --system-site-packages "$HOME/venv"
+        - source "$HOME/venv/bin/activate"
+
 
     - os: osx
       osx_image: xcode11
-
+      addons:
+        homebrew:
+          packages: python3
