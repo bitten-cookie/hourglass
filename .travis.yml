@@ -1,6 +1,10 @@
 language: cpp
 dist: xenial
 
+branches:
+  only:
+    - master
+
 install:
   # Install conan
   - pip3 install conan
@@ -23,8 +27,6 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-7
-            - python3
-            - python3-pip
       env:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 
@@ -35,8 +37,6 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-8
-            - python3
-            - python3-pip
       env:
         - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
 
@@ -47,8 +47,6 @@ matrix:
             - llvm-toolchain-trusty-4.0
           packages:
             - clang-4.0
-            - python3
-            - python3-pip
       env:
         - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0"
 
