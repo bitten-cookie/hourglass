@@ -1,4 +1,4 @@
-# Hourglass :hourglass_flowing_sand:
+# Hourglass :hourglass_flowing_sand: [![Build Status](https://travis-ci.com/bitten-cookie/hourglass.svg?branch=master)](https://travis-ci.com/bitten-cookie/hourglass)
 
 **Hourglass** is a C++ library that enables event-driven design over a *time-series*.
 
@@ -61,12 +61,16 @@ int main()
 ```
 
 ## Use the library
-### As a CMake submodule
+### CMake submodule
+As simple as `add_subdirectory(hourglass)` and then `target_link_libraries(yourTarget hourglass)`
 
 ### Installing in the system
 *Todo*: Complete CMake install process
 
 ### As a Conan package
+*Todo*: A PR would be appreciated.
+
+## Docs
 *Todo*: A PR would be appreciated.
 
 ## More usages example

@@ -36,17 +36,17 @@ int main()
 {
     constexpr auto number_of_days_to_simulate = 4;
     game_status g{};
-    g.hourglass_.addEvent(1, {"You found a life pack (+10)", [](game_status g){
-        g.player.hp += 10;
-        return g;
+    g.hourglass_.addEvent(1, {"You found a life pack (+10)", [](game_status&& gs){
+        gs.player.hp += 10;
+        return gs;
     }});
-    g.hourglass_.addEvent(2, {"End of the month. Here's your salary: 200", [](game_status g){
-        g.player.money += 200;
-        return g;
+    g.hourglass_.addEvent(2, {"End of the month. Here's your salary: 200", [](game_status&& gs){
+        gs.player.money += 200;
+        return gs;
     }});
-    g.hourglass_.addEvent(3, {"You've got a cold. (-70)", [](game_status g){
-        g.player.hp -= 70;
-        return g;
+    g.hourglass_.addEvent(3, {"You've got a cold. (-70)", [](game_status&& gs){
+        gs.player.hp -= 70;
+        return gs;
     }});
 
 

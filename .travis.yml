@@ -1,0 +1,76 @@
+language: python
+python: 3.6
+dist: xenial
+
+branches:
+  only:
+    - master
+
+install:
+  # Install conan
+  - pip install conan
+  # Automatic detection of your arch, compiler, etc.
+  - conan user
+
+script:
+  # Call the build system
+  - cmake . -DBUILD_TESTS=ON -DBUILD_DEMOS=ON -DCMAKE_BUILD_TYPE=Release
+  - cmake --build .
+  # Run tests
+  - ctest .
+
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
+      env:
+        - CC=gcc-7
+        - CXX=g++-7
+
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-8
+      env:
+        - CC=gcc-8
+        - CXX=g++-8
+
+    - os: linux
+      addons:
+        apt:
+          packages:
+            - clang-5.0
+      env:
+        - CC=clang-5.0
+        - CXX=clang++-5.0
+
+    - os: linux
+      addons:
+        apt:
+          packages:
+            - clang-6.0
+      env:
+        - CC=clang-6.0
+        - CXX=clang++-6.0
+
+    - os: osx
+      language: generic
+      osx_image: xcode10.3
+      addons:
+        homebrew:
+          packages: python3
+
+    - os: osx
+      language: generic
+      osx_image: xcode11
+      addons:
+        homebrew:
+          packages: python3
