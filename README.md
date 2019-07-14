@@ -61,12 +61,16 @@ int main()
 ```
 
 ## Use the library
-### As a CMake submodule
+### CMake submodule
+As simple as `add_subdirectory(hourglass)` and then `target_link_libraries(yourTarget hourglass)`
 
 ### Installing in the system
 *Todo*: Complete CMake install process
 
 ### As a Conan package
+*Todo*: A PR would be appreciated.
+
+## Docs
 *Todo*: A PR would be appreciated.
 
 ## More usages example
