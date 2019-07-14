@@ -5,9 +5,6 @@ branches:
   only:
     - master
 
-before_install:
-  - eval "${MATRIX_EVAL}"
-
 install:
   # Install conan
   - pip3 install conan
@@ -33,7 +30,6 @@ matrix:
       env:
         - CC=gcc-7
         - CXX=g++-7
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 
     - os: linux
       addons:
@@ -43,7 +39,8 @@ matrix:
           packages:
             - g++-8
       env:
-        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
+        - CC=gcc-8
+        - CXX=g++-8
 
     - os: linux
       addons:
@@ -53,7 +50,8 @@ matrix:
           packages:
             - clang-4.0
       env:
-        - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0"
+        - CC=clang-4.0
+        - CXX=clang++-4.0
 
     - os: linux
       addons:
@@ -63,5 +61,6 @@ matrix:
           packages:
             - clang-5.0
       env:
-        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
+        - CC=clang-5.0
+        - CXX=clang++-5.0
 
