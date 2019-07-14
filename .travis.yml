@@ -4,6 +4,7 @@ dist: xenial
 
 os:
   - linux
+  - osx
 
 compiler:
   - gcc
@@ -11,7 +12,7 @@ compiler:
 
 install:
   # Install conan
-  - pip install conan
+  - pip3 install conan
   # Automatic detection of your arch, compiler, etc.
   - conan user
   # /usr/bin/gcc is 4.6 always, but gcc-X.Y is available.
