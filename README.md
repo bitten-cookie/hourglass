@@ -2,6 +2,11 @@
 
 **Hourglass** is a C++ library that enables event-driven design over a *time-series*.
 
+## Features
+
+- Lambda / `std::function` support
+- `std::unique_ptr` support
+
 ## Quick-example
 
 ```cpp
