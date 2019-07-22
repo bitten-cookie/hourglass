@@ -6,23 +6,37 @@
 
 using namespace bittencookie;
 
-class SimpleEvent
+namespace
 {
-public:
-    explicit SimpleEvent(int v) : value_(v) {}
-    virtual ~SimpleEvent() = default;
-    virtual int value() const { return value_; }
+    class BaseEvent
+    {
+    public:
+        virtual ~BaseEvent() = default;
+        virtual int value() const = 0;
+    };
 
-protected:
-    int value_;
-};
+    class SimpleEvent : public BaseEvent
+    {
+    public:
+        int value() const override { return 10; }
+    };
 
-using SimpleEvent_uptr = std::unique_ptr<SimpleEvent>;
+    class DoubleEvent : public BaseEvent
+    {
+    public:
+        int value() const override { return 20; }
+    };
+
+    using BaseEvent_uptr = std::unique_ptr<BaseEvent>;
+}
+
 
 TEST(Hourglass, SupportsUniquePtr)
 {
-    hourglass<SimpleEvent_uptr> h;
-    auto e = std::make_unique<SimpleEvent>(10);
+    std::vector<int> a;
+    a.push_back(1);
+    hourglass<BaseEvent_uptr> h;
+    auto e = std::make_unique<SimpleEvent>();
     h.addEvent(0, std::move(e));
 
     ASSERT_EQ(h.currentTime(), 0);
@@ -36,8 +50,8 @@ TEST(Hourglass, SupportsUniquePtr)
 
 TEST(Hourglass, SupportsUniquePtrInPlaceConstruct)
 {
-    hourglass<SimpleEvent_uptr> h;
-    h.addEvent(0, 10);
+    hourglass<BaseEvent_uptr> h;
+    h.emplaceEvent<SimpleEvent>(0);
 
     ASSERT_EQ(h.currentTime(), 0);
 
@@ -47,3 +61,33 @@ TEST(Hourglass, SupportsUniquePtrInPlaceConstruct)
     const auto& event = events[0];
     ASSERT_EQ(event.get()->value(), 10);
 }
+
+TEST(Hourglass, SupportsDerivedPointers)
+{
+    hourglass<BaseEvent_uptr> h;
+    auto e = std::make_unique<DoubleEvent>();
+    h.addEvent(0, std::move(e));
+
+    ASSERT_EQ(h.currentTime(), 0);
+
+    const auto& events = h.eventsForCurrentTime();
+    ASSERT_EQ(events.size(), 1);
+
+    const auto& event = events[0];
+    ASSERT_EQ(event.get()->value(), 20);
+}
+
+TEST(Hourglass, SupportsDerivedPointersInPlaceConstruct)
+{
+    hourglass<BaseEvent_uptr> h;
+    h.emplaceEvent<DoubleEvent>(0);
+
+    ASSERT_EQ(h.currentTime(), 0);
+
+    const auto& events = h.eventsForCurrentTime();
+    ASSERT_EQ(events.size(), 1);
+
+    const auto& event = events[0];
+    ASSERT_EQ(event.get()->value(), 20);
+}
+

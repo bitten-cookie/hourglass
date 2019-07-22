@@ -32,16 +32,20 @@ namespace bittencookie
         void addEvent(Time&& t, Event&& e) { timeline_.emplace(std::forward<Time>(t), std::forward<Event>(e)); }
 
         template<class SubType = Event, class ...EventArgs>
-        void addEvent(Time&& t, EventArgs... args)
+        void emplaceEvent(Time&& t, EventArgs... args)
         {
             if constexpr(is_unique_pointer_v<SubType>)
             {
                 using UnderlyingType = typename SubType::element_type;
-                addEvent(std::forward<Time>(t), std::make_unique<UnderlyingType>(args...));
+                timeline_.emplace(std::forward<Time>(t), std::make_unique<UnderlyingType>(std::forward<EventArgs>(args)...));
+            }
+            else if constexpr(is_unique_pointer_v<Event>)
+            {
+                timeline_.emplace(std::forward<Time>(t), std::make_unique<SubType>(std::forward<EventArgs>(args)...));
             }
             else
             {
-                addEvent(std::forward<Time>(t), SubType(args...));
+                addEvent(std::forward<Time>(t), SubType(std::forward<EventArgs>(args)...));
             }
         }
 
