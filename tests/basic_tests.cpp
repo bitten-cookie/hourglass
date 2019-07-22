@@ -4,7 +4,11 @@
 
 using namespace bittencookie;
 
-struct DumbEvent {};
+namespace
+{
+    struct DumbEvent {};
+}
+
 
 TEST(Hourglass, Default_ctor)
 {
@@ -30,10 +34,10 @@ TEST(Hourglass, AddingEvents)
 {
     hourglass<DumbEvent> h(0);
 
-    h.addEvent(0);
-    h.addEvent(1);
-    h.addEvent(1);
-    h.addEvent(2);
+    h.emplaceEvent(0);
+    h.emplaceEvent(1);
+    h.emplaceEvent(1);
+    h.emplaceEvent(2);
 
     ASSERT_EQ(h.currentTime(), 0);
     ASSERT_EQ(h.pastEvents().empty(), true);
