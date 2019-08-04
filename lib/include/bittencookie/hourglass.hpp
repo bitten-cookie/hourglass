@@ -30,6 +30,7 @@ namespace bittencookie
         void advanceTime() { ++time_; }
 
         void addEvent(Time&& t, Event&& e) { timeline_.emplace(std::forward<Time>(t), std::forward<Event>(e)); }
+        void addEvent(const Time& t, Event&& e) { timeline_.emplace(t, std::forward<Event>(e)); }
 
         template<class SubType = Event, class ...EventArgs>
         void emplaceEvent(Time&& t, EventArgs... args)
@@ -63,6 +64,8 @@ namespace bittencookie
         {
             return this->eventsOnRange({timeline_.upper_bound(time_), std::end(timeline_)});
         }
+
+        size_t totalEvents() const { return timeline_.size(); }
 
     protected:
         Time time_ = {};

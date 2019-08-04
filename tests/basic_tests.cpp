@@ -18,6 +18,7 @@ TEST(Hourglass, Default_ctor)
     ASSERT_EQ(h.pastEvents().empty(), true);
     ASSERT_EQ(h.eventsForCurrentTime().empty(), true);
     ASSERT_EQ(h.futureEvents().empty(), true);
+    ASSERT_EQ(h.totalEvents(), 0);
 }
 
 TEST(Hourglass, Ctor_with_specific_time)
@@ -28,6 +29,7 @@ TEST(Hourglass, Ctor_with_specific_time)
     ASSERT_EQ(h.pastEvents().empty(), true);
     ASSERT_EQ(h.eventsForCurrentTime().empty(), true);
     ASSERT_EQ(h.futureEvents().empty(), true);
+    ASSERT_EQ(h.totalEvents(), 0);
 }
 
 TEST(Hourglass, AddingEvents)
@@ -40,6 +42,7 @@ TEST(Hourglass, AddingEvents)
     h.emplaceEvent(2);
 
     ASSERT_EQ(h.currentTime(), 0);
+    ASSERT_EQ(h.totalEvents(), 4);
     ASSERT_EQ(h.pastEvents().empty(), true);
     ASSERT_EQ(h.eventsForCurrentTime().size(), 1);
     ASSERT_EQ(h.futureEvents().size(), 3);
