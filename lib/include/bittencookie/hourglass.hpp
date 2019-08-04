@@ -64,6 +64,8 @@ namespace bittencookie
             return this->eventsOnRange({timeline_.upper_bound(time_), std::end(timeline_)});
         }
 
+        size_t totalEvents() const { return timeline_.size(); }
+
     protected:
         Time time_ = {};
         std::multimap<Time, Event> timeline_ = {};
