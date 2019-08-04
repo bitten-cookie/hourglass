@@ -29,42 +29,42 @@ time-point when it should be triggered.
 So, you can do it by:
 
 ```cpp
-g.hourglass_.addEvent({"You found a life pack (+10)", [](game_status g){
-    g.player.hp += 10;
-    return g;
-}}, 1);
-g.hourglass_.addEvent({"End of the month. Here's your salary: 200", [](game_status g){
-    g.player.money += 200;
-    return g;
-}}, 2);
-g.hourglass_.addEvent({"You've got a cold. (-70)", [](game_status g){
-    g.player.hp -= 70;
-    return g;
-}}, 3);
+g.hourglass_.addEvent(1, {"You found a life pack (+10)", [](game_status&& gs){
+    gs.player.hp += 10;
+    return std::move(gs);
+}});
+g.hourglass_.addEvent(2, {"End of the month. Here's your salary: 200", [](game_status&& gs){
+    gs.player.money += 200;
+    return std::move(gs);
+}});
+g.hourglass_.addEvent(3, {"You've got a cold. (-70)", [](game_status&& gs){
+    gs.player.hp -= 70;
+    return std::move(gs);
+}});
 ```
 
 **Hourglass** enables you to simulate the time passing through. With a game loop as simple as:
 
 ```cpp
-    for(auto i = 0; i < number_of_days_to_simulate; i++)
+for(auto i = 0; i < number_of_days_to_simulate; i++)
+{
+    // simulate today's day
+    std::cout << "DAY [" << g.hourglass_.currentTime() << "] starts with " << std::endl;
+    print_player_status(g.player);
+    std::cout << std::endl;
+
+    for(const auto& e : g.hourglass_.eventsForCurrentTime())
     {
-        // simulate today's day
-        std::cout << "DAY [" << g.hourglass_.currentTime() << "] starts with " << std::endl;
+        const auto& evt = e.get();
+        std::cout << evt << std::endl;
+        g = evt.behavior(std::move(g));
         print_player_status(g.player);
         std::cout << std::endl;
-
-        for(const auto& e : g.hourglass_.eventsForCurrentTime())
-        {
-            const auto& evt = e.get();
-            std::cout << evt << std::endl;
-            g = evt.behavior(std::move(g));
-            print_player_status(g.player);
-            std::cout << std::endl;
-        }
-        
-        // next day
-        g.hourglass_.advanceTime();
     }
+    
+    // next day
+    g.hourglass_.advanceTime();
+}
 ```
 
 ```

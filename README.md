@@ -4,6 +4,7 @@
 
 ## Features
 
+- Easy setup of a timeline of events
 - Lambda / `std::function` support
 - `std::unique_ptr` support
 
