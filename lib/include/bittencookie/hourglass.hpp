@@ -30,6 +30,7 @@ namespace bittencookie
         void advanceTime() { ++time_; }
 
         void addEvent(Time&& t, Event&& e) { timeline_.emplace(std::forward<Time>(t), std::forward<Event>(e)); }
+        void addEvent(const Time& t, Event&& e) { timeline_.emplace(t, std::forward<Event>(e)); }
 
         template<class SubType = Event, class ...EventArgs>
         void emplaceEvent(Time&& t, EventArgs... args)
